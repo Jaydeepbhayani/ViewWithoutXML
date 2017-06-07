@@ -47,11 +47,11 @@ public class SignUPActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void setProperties() {
-        tvTitle.setText("MoBack Task");
+        tvTitle.setText(getString(R.string.title));
         tvTitle.setTextSize(30);
         tvTitle.setGravity(Gravity.CENTER);
 
-        tvSignIn.setText("Already Registered ? Login Now !");
+        tvSignIn.setText(getString(R.string.str_login));
         tvSignIn.setTextColor(Color.rgb(255, 64, 129));
         tvSignIn.setGravity(Gravity.CENTER);
 
@@ -66,7 +66,7 @@ public class SignUPActivity extends AppCompatActivity implements View.OnClickLis
         etConfirmPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
         etConfirmPassword.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_key), null);
 
-        btnCreateAccount.setText("Register");
+        btnCreateAccount.setText(getString(R.string.str_register));
         btnCreateAccount.setTextColor(Color.WHITE);
         btnCreateAccount.setBackgroundColor(Color.rgb(63, 81, 181));
     }

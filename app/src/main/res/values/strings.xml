@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">CustomViewWithoutXML</string>
+    <string name="title">Demo App</string>
+    <string name="str_signup">Not Registered ? Register Now !</string>
+    <string name="str_submit">Submit</string>
+    <string name="str_login">Already Registered ? Login Now !</string>
+    <string name="str_register">Register</string>
+    <string name="str_pwd_not_match">Old Password is wrong!</string>
+    <string name="str_empty">Fields are empty!</string>
+    <string name="str_welcome">Welcome:\u0020</string>
+    <string name="str_logout">Logout</string>
+    <string name="str_change_pwd">Change Password</string>
 </resources>

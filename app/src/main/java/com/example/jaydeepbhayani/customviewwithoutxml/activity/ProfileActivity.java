@@ -63,16 +63,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         sharedpreferences = getBaseContext().getSharedPreferences(MyPREFERENCES, 0);
         String loadUsername = sharedpreferences.getString(USERNAME, null);
-        tvUserName.setText("Welcome : " + loadUsername);
+        tvUserName.setText(getString(R.string.str_welcome) + loadUsername);
         tvUserName.setTextSize(21);
         tvUserName.setTextColor(Color.rgb(255, 64, 129));
         tvUserName.setGravity(Gravity.CENTER);
 
-        btnChangePassword.setText("Change Password");
+        btnChangePassword.setText(getString(R.string.str_change_pwd));
         btnChangePassword.setTextColor(Color.WHITE);
         btnChangePassword.setBackgroundColor(Color.rgb(63, 81, 181));
 
-        btnSignOut.setText("Logout");
+        btnSignOut.setText(getString(R.string.str_logout));
         btnSignOut.setTextColor(Color.WHITE);
         btnSignOut.setBackgroundColor(Color.rgb(63, 81, 181));
     }
@@ -170,20 +170,25 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userName = etOldPassword.getText().toString().trim();
-                String password = etNewPassword.getText().toString().trim();
-
+                String oldPassword = etOldPassword.getText().toString().trim();
+                String newPassword = etNewPassword.getText().toString().trim();
+                sharedpreferences = getBaseContext().getSharedPreferences(MyPREFERENCES, 0);
+                String loadUsername = sharedpreferences.getString(USERNAME, null);
                 // fetch the Password form database for respective user name
-                String storedPassword = loginDataBaseAdapter.getSinlgeEntry(userName);
-                System.out.println("Value :::"+storedPassword);
-                if (password.equals(storedPassword)) {
-                    //Toast.makeText(ProfileActivity.this, "pwd matched", Toast.LENGTH_SHORT).show();
-                    tvError.setText("pwd matched");
-                    tvError.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_error), null, null, null);
-                }/* else if (!userName.isEmpty() && !password.isEmpty()) {
-                    loginDataBaseAdapter.updateEntry(userName, password);
-                }*/ else {
-                    tvError.setText("Fields are empty");
+                String storedPassword = loginDataBaseAdapter.getSinlgeEntry(loadUsername);
+                System.out.println("Value :::" + storedPassword);
+                if (!(oldPassword.isEmpty() && newPassword.isEmpty())) {
+                    if (oldPassword.matches(storedPassword)) {
+                        // update the Password form database when user is loggedIn
+                        loginDataBaseAdapter.updateEntry(loadUsername, newPassword);
+                        Toast.makeText(ProfileActivity.this, "Successfully Changed", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    } else {
+                        tvError.setText(getString(R.string.str_pwd_not_match));
+                        tvError.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_error), null, null, null);
+                    }
+                } else {
+                    tvError.setText(getString(R.string.str_empty));
                     tvError.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.ic_error), null, null, null);
                 }
             }
